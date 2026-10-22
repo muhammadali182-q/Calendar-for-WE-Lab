@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DAYMARK</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <h1 class="brand-name">DAYMARK</h1>
+      </div>
+
+      <div class="nav" role="group" aria-label="Calendar navigation">
+        <button id="prev-btn" class="icon-btn" type="button" aria-label="Previous month">&#8249;</button>
+        <h2 id="period-title" class="period-title" aria-live="polite"></h2>
+        <button id="next-btn" class="icon-btn" type="button" aria-label="Next month">&#8250;</button>
+      </div>
+
+      <div class="controls">
+        <button id="today-btn" class="btn" type="button">Today</button>
+        <div class="segmented" role="group" aria-label="Calendar view">
+          <button id="view-month" class="seg" type="button" aria-pressed="true">Month</button>
+          <button id="view-week" class="seg" type="button" aria-pressed="false">Week</button>
+        </div>
+        <button id="new-event-btn" class="btn btn-primary" type="button">New event</button>
+      </div>
+    </header>
+
+    <main class="workspace">
+      <section class="calendar" aria-label="Calendar">
+        <p id="period-count" class="period-count"></p>
+        <div id="calendar-view" class="calendar-view"></div>
+      </section>
+
+      <aside class="sidebar">
+        <section class="panel" aria-labelledby="selected-heading">
+          <h2 id="selected-heading" class="panel-label">Selected day</h2>
+          <div id="selected-day"></div>
+        </section>
+
+        <section class="panel" aria-labelledby="upcoming-heading">
+          <h2 id="upcoming-heading" class="panel-label">Upcoming</h2>
+          <ul id="upcoming-list" class="event-list"></ul>
+        </section>
+      </aside>
+    </main>
+  </div>
+
+  <dialog id="composer" class="composer" aria-labelledby="composer-title">
+    <form id="event-form" class="composer-form" novalidate>
+      <header class="composer-head">
+        <h2 id="composer-title">New event</h2>
+        <button id="composer-close" class="icon-btn" type="button" aria-label="Close">&times;</button>
+      </header>
+
+      <div class="composer-body">
+        <input type="hidden" id="event-id">
+
+        <div class="field">
+          <label for="event-title">Title</label>
+          <input id="event-title" type="text" maxlength="80" autocomplete="off"
+                 aria-describedby="event-title-error" autofocus>
+          <p id="event-title-error" class="error" role="alert"></p>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="event-date">Date</label>
+            <input id="event-date" type="date" aria-describedby="event-date-error">
+            <p id="event-date-error" class="error" role="alert"></p>
+          </div>
+          <div class="field">
+            <label for="event-time">Start time <span class="optional">optional</span></label>
+            <input id="event-time" type="time">
+          </div>
+        </div>
+
+        <fieldset class="field category-field">
+          <legend>Category</legend>
+          <div class="category-options">
+            <label class="cat-option" data-category="study">
+              <input type="radio" name="category" value="study" checked><span>Study</span>
+            </label>
+            <label class="cat-option" data-category="work">
+              <input type="radio" name="category" value="work"><span>Work</span>
+            </label>
+            <label class="cat-option" data-category="personal">
+              <input type="radio" name="category" value="personal"><span>Personal</span>
+            </label>
+            <label class="cat-option" data-category="other">
+              <input type="radio" name="category" value="other"><span>Other</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="event-description">Description <span class="optional">optional</span></label>
+          <textarea id="event-description" rows="4" maxlength="500"></textarea>
+        </div>
+      </div>
+
+      <footer class="composer-actions">
+        <button id="delete-btn" class="btn btn-danger" type="button" hidden>Delete</button>
+        <span class="spacer"></span>
+        <button id="cancel-btn" class="btn" type="button">Cancel</button>
+        <button id="save-btn" class="btn btn-primary" type="submit">Add event</button>
+      </footer>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
